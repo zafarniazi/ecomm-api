@@ -12,15 +12,14 @@ const usersRoutes = require("./routes/users");
 const ordersRoutes = require("./routes/orders");
 const cors = require('cors');
 const authjwt = require("./helper/jwt");
+const errorhandler = require("./helper/errorhandler");
 //middleware
-app.use(function (err, req, res, next) {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-});
+
 app.use(morgan("tiny"));
 app.use(bodyparser.json());
 app.use(cors());
 app.use(authjwt())
+app.use(errorhandler);
 app.options('*', cors())
 const api = process.env.API_URL;
 //Routers
