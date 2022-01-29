@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: ''
     },
-    zip: {
+    zip :{
         type: String,
         default: ''
     },
@@ -42,6 +42,14 @@ const userSchema = new mongoose.Schema({
         default: ''
     }
 
+});
+
+userSchema.virtual('id').get(function () {
+    return this._id.toHexString();
+});
+
+userSchema.set('toJSON', {
+    virtuals: true,
 });
 
 exports.User = mongoose.model('User', userSchema);
